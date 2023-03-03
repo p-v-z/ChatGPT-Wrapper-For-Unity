@@ -7,6 +7,7 @@ namespace ChatGPTWrapper {
     {
         [SerializeField]
         private string _apiKey = null;
+        protected void SetApiKey(string apiKey) => _apiKey = apiKey;
 
         public enum Model {
             ChatGPT,
