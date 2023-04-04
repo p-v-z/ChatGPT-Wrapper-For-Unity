@@ -47,8 +47,21 @@ namespace ChatGPTWrapper {
 
         public UnityStringEvent chatGPTResponse = new UnityStringEvent();
 
-        private void OnEnable()
+#if UNITY_EDITOR
+        private void Awake() 
         {
+            TextAsset textAsset = Resources.Load<TextAsset>("debug-key");
+            if (textAsset != null) {
+                _apiKey = textAsset.text;
+                Debug.Log("Got API key from debug-key.txt: " + _apiKey);
+            } else{
+                Debug.Log("No debug-key.txt found");
+            }
+        }
+#endif
+
+        private void OnEnable()
+        {            
             
             _reqHeaders = new List<(string, string)>
             { 
